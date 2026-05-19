@@ -15,21 +15,20 @@ public class AdherentDaoImplement implements AdherentInterface {
 
     @Override
     public void save(Adherent a) {
-        String sql = "INSERT INTO adherent (id_utilisateur, numero_identification, nom, prenom, date_naissance, adresse, telephone, email, profession, employeur, revenus_estimes, statut) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO adherent (numero_identification, nom, prenom, date_naissance, adresse, telephone, email, profession, employeur, revenus_estimes, statut) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setInt(1, a.getIdUtilisateur());
-            stmt.setString(2, a.getNumeroIdentification());
-            stmt.setString(3, a.getNom());
-            stmt.setString(4, a.getPrenom());
-            stmt.setDate(5, a.getDateNaissance());
-            stmt.setString(6, a.getAdresse());
-            stmt.setString(7, a.getTelephone());
-            stmt.setString(8, a.getEmail());
-            stmt.setString(9, a.getProfession());
-            stmt.setString(10, a.getEmployeur());
-            stmt.setBigDecimal(11, a.getRevenusEstimes());
-            stmt.setString(12, a.getStatut().name().toLowerCase());
+            stmt.setString(1, a.getNumeroIdentification());
+            stmt.setString(2, a.getNom());
+            stmt.setString(3, a.getPrenom());
+            stmt.setDate(4, a.getDateNaissance());
+            stmt.setString(5, a.getAdresse());
+            stmt.setString(6, a.getTelephone());
+            stmt.setString(7, a.getEmail());
+            stmt.setString(8, a.getProfession());
+            stmt.setString(9, a.getEmployeur());
+            stmt.setBigDecimal(10, a.getRevenusEstimes());
+            stmt.setString(11, a.getStatut().name().toLowerCase());
             stmt.executeUpdate();
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
@@ -45,22 +44,21 @@ public class AdherentDaoImplement implements AdherentInterface {
 
     @Override
     public void update(Adherent a) {
-        String sql = "UPDATE adherent SET id_utilisateur = ?, numero_identification = ?, nom = ?, prenom = ?, date_naissance = ?, adresse = ?, telephone = ?, email = ?, profession = ?, employeur = ?, revenus_estimes = ?, statut = ? WHERE id_adherent = ?";
+        String sql = "UPDATE adherent SET numero_identification = ?, nom = ?, prenom = ?, date_naissance = ?, adresse = ?, telephone = ?, email = ?, profession = ?, employeur = ?, revenus_estimes = ?, statut = ? WHERE id_adherent = ?";
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, a.getIdUtilisateur());
-            stmt.setString(2, a.getNumeroIdentification());
-            stmt.setString(3, a.getNom());
-            stmt.setString(4, a.getPrenom());
-            stmt.setDate(5, a.getDateNaissance());
-            stmt.setString(6, a.getAdresse());
-            stmt.setString(7, a.getTelephone());
-            stmt.setString(8, a.getEmail());
-            stmt.setString(9, a.getProfession());
-            stmt.setString(10, a.getEmployeur());
-            stmt.setBigDecimal(11, a.getRevenusEstimes());
-            stmt.setString(12, a.getStatut().name().toLowerCase());
-            stmt.setInt(13, a.getIdAdherent());
+            stmt.setString(1, a.getNumeroIdentification());
+            stmt.setString(2, a.getNom());
+            stmt.setString(3, a.getPrenom());
+            stmt.setDate(4, a.getDateNaissance());
+            stmt.setString(5, a.getAdresse());
+            stmt.setString(6, a.getTelephone());
+            stmt.setString(7, a.getEmail());
+            stmt.setString(8, a.getProfession());
+            stmt.setString(9, a.getEmployeur());
+            stmt.setBigDecimal(10, a.getRevenusEstimes());
+            stmt.setString(11, a.getStatut().name().toLowerCase());
+            stmt.setInt(12, a.getIdAdherent());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -207,7 +205,6 @@ public class AdherentDaoImplement implements AdherentInterface {
     private Adherent mapResultSetToAdherent(ResultSet rs) throws SQLException {
         Adherent a = new Adherent();
         a.setIdAdherent(rs.getInt("id_adherent"));
-        a.setIdUtilisateur(rs.getInt("id_utilisateur"));
         a.setNumeroIdentification(rs.getString("numero_identification"));
         a.setNom(rs.getString("nom"));
         a.setPrenom(rs.getString("prenom"));
