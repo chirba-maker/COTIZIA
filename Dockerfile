@@ -12,4 +12,4 @@ FROM tomcat:10.1-jdk21
 COPY --from=build /app/target/COTIZIA-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
 
 EXPOSE 8080
-CMD ["catalina.sh", "run"]
+CMD sed -i "s/port=\"8080\"/port=\"${PORT:-8080}\"/g" /usr/local/tomcat/conf/server.xml && catalina.sh run
