@@ -2,7 +2,6 @@ package servlets;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,7 +15,6 @@ import services.AuditService;
  * Controller for User Profile Management.
  * Allows any logged-in user to update their own info and password.
  */
-@WebServlet("/profile")
 public class ProfileController extends HttpServlet {
 
     private final UtilisateurDaoImplement userDAO = new UtilisateurDaoImplement();
@@ -28,7 +26,7 @@ public class ProfileController extends HttpServlet {
             throws ServletException, IOException {
         Utilisateur user = (Utilisateur) request.getSession().getAttribute("user");
         if (user == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
+            response.sendRedirect(request.getContextPath() + "/connexion");
             return;
         }
 
@@ -44,7 +42,7 @@ public class ProfileController extends HttpServlet {
             throws ServletException, IOException {
         Utilisateur sessionUser = (Utilisateur) request.getSession().getAttribute("user");
         if (sessionUser == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
+            response.sendRedirect(request.getContextPath() + "/connexion");
             return;
         }
 
