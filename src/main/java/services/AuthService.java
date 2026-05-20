@@ -3,7 +3,7 @@ package services;
 import dao.UtilisateurDaoImplement;
 import dao.UtilisateurInterface;
 import models.Utilisateur;
-import org.mindrot.jbcrypt.BCrypt;
+
 
 /**
  * Service for Authentication and Password Security.
@@ -23,33 +23,19 @@ public class AuthService {
     }
 
     /**
-     * Hashes a password using BCrypt.
+     * Retourne le mot de passe tel quel (sans hachage).
      */
     public String hashPassword(String plainTextPassword) {
-        if (plainTextPassword == null)
-            return null;
-        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+        return plainTextPassword;
     }
 
     /**
-     * Verifies a password. Supports BCrypt and legacy plain text.
+     * Compare les mots de passe en clair.
      */
     public boolean checkPassword(String plainTextPassword, String storedPassword) {
         if (storedPassword == null || plainTextPassword == null) {
             return false;
         }
-
-        // Check if stored password is a BCrypt hash
-        if (storedPassword.startsWith("$2a$") || storedPassword.startsWith("$2b$")
-                || storedPassword.startsWith("$2y$")) {
-            try {
-                return BCrypt.checkpw(plainTextPassword, storedPassword);
-            } catch (Exception e) {
-                return false;
-            }
-        }
-
-        // Legacy plain text comparison
         return plainTextPassword.equals(storedPassword);
     }
 
