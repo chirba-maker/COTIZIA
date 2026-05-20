@@ -7,11 +7,11 @@
  * Created: 24 févr. 2026
  */
 
-DROP DATABASE IF EXISTS gestion_cotisation;
+-- DROP DATABASE IF EXISTS gestion_cotisation;
 
-CREATE DATABASE gestion_cotisation CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- CREATE DATABASE gestion_cotisation CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-USE gestion_cotisation;
+-- USE gestion_cotisation;
 
 CREATE TABLE utilisateur (
     id_utilisateur INT NOT NULL AUTO_INCREMENT,
@@ -825,7 +825,7 @@ VALUES (
         '2026-01-31',
         50000.00,
         0.00,
-        'impayee'
+        'impaye'
     ),
     (
         6,
@@ -834,7 +834,7 @@ VALUES (
         '2026-02-28',
         50000.00,
         0.00,
-        'impayee'
+        'impaye'
     ),
     (
         6,
