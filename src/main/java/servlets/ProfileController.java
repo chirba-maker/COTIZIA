@@ -5,6 +5,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.InputStream;
+import java.util.Base64;
 
 import models.Utilisateur;
 import dao.UtilisateurDaoImplement;
@@ -68,6 +71,23 @@ public class ProfileController extends HttpServlet {
             // Update password if provided
             if (password != null && !password.trim().isEmpty()) {
                 user.setMotDePasse(authService.hashPassword(password));
+            }
+
+            // Handle file upload
+            Part filePart = request.getPart("photo");
+            if (filePart != null && filePart.getSize() > 0) {
+                try (InputStream inputStream = filePart.getInputStream()) {
+                    byte[] imageBytes = inputStream.readAllBytes();
+                    String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                    String mimeType = filePart.getContentType();
+                    if (mimeType != null && mimeType.startsWith("image/")) {
+                        user.setPhoto("data:" + mimeType + ";base64," + base64Image);
+                    } else {
+                        request.getSession().setAttribute("error", "Le fichier importé n'est pas une image valide.");
+                        response.sendRedirect(request.getContextPath() + "/profile");
+                        return;
+                    }
+                }
             }
 
             userDAO.update(user);

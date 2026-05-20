@@ -27,6 +27,7 @@ public class Utilisateur {
     private boolean actif;
     private Timestamp dateCreation;
     private Timestamp dateModification;
+    private String photo;
 
     public Utilisateur() {
     }
@@ -134,6 +135,14 @@ public class Utilisateur {
 
     public void setDateModification(Timestamp dateModification) {
         this.dateModification = dateModification;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     @Override

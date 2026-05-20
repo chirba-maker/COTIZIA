@@ -15,7 +15,7 @@ public class UtilisateurDaoImplement implements UtilisateurInterface {
 
     @Override
     public void save(Utilisateur u) {
-        String sql = "INSERT INTO utilisateur (nom, prenom, login, email, mot_de_passe, role, actif) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO utilisateur (nom, prenom, login, email, mot_de_passe, role, actif, photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, u.getNom());
@@ -25,6 +25,7 @@ public class UtilisateurDaoImplement implements UtilisateurInterface {
             stmt.setString(5, u.getMotDePasse());
             stmt.setString(6, u.getRole().name().toLowerCase());
             stmt.setBoolean(7, u.isActif());
+            stmt.setString(8, u.getPhoto());
             stmt.executeUpdate();
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
@@ -39,7 +40,7 @@ public class UtilisateurDaoImplement implements UtilisateurInterface {
 
     @Override
     public void update(Utilisateur u) {
-        String sql = "UPDATE utilisateur SET nom = ?, prenom = ?, login = ?, email = ?, mot_de_passe = ?, role = ?, actif = ? WHERE id_utilisateur = ?";
+        String sql = "UPDATE utilisateur SET nom = ?, prenom = ?, login = ?, email = ?, mot_de_passe = ?, role = ?, actif = ?, photo = ? WHERE id_utilisateur = ?";
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, u.getNom());
@@ -49,7 +50,8 @@ public class UtilisateurDaoImplement implements UtilisateurInterface {
             stmt.setString(5, u.getMotDePasse());
             stmt.setString(6, u.getRole().name().toLowerCase());
             stmt.setBoolean(7, u.isActif());
-            stmt.setInt(8, u.getIdUtilisateur());
+            stmt.setString(8, u.getPhoto());
+            stmt.setInt(9, u.getIdUtilisateur());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -135,6 +137,7 @@ public class UtilisateurDaoImplement implements UtilisateurInterface {
         u.setActif(rs.getBoolean("actif"));
         u.setDateCreation(rs.getTimestamp("date_creation"));
         u.setDateModification(rs.getTimestamp("date_modification"));
+        u.setPhoto(rs.getString("photo"));
         return u;
     }
 }

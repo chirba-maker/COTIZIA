@@ -51,6 +51,11 @@
     <servlet>
         <servlet-name>ProfileController</servlet-name>
         <servlet-class>servlets.ProfileController</servlet-class>
+        <multipart-config>
+            <max-file-size>5242880</max-file-size>
+            <max-request-size>5242880</max-request-size>
+            <file-size-threshold>1048576</file-size-threshold>
+        </multipart-config>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
