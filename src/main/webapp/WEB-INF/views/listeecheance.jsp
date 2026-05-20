@@ -87,7 +87,7 @@
                                                     </c:if>
                                                     <a href="paiements?idEcheance=${e.idEcheance}"
                                                         class="btn btn-sm btn-outline-info" title="Historique"><i
-                                                            class="bi bi-history"></i></a>
+                                                            class="bi bi-clock-history"></i></a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
