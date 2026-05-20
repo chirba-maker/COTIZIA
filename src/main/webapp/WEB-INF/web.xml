@@ -48,6 +48,10 @@
         <servlet-name>ResourceController</servlet-name>
         <servlet-class>servlets.ResourceController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProfileController</servlet-name>
+        <servlet-class>servlets.ProfileController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/connexion</url-pattern>
@@ -99,6 +103,10 @@
     <servlet-mapping>
         <servlet-name>ResourceController</servlet-name>
         <url-pattern>/assets/css/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileController</servlet-name>
+        <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
