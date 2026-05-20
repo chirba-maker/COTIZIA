@@ -24,7 +24,7 @@ public class AuthServiceTest {
     public void authenticate_withValidCredentials_returnsUser() {
         Utilisateur mockUser = new Utilisateur();
         mockUser.setLogin("jdoe");
-        mockUser.setMotDePasse(org.mindrot.jbcrypt.BCrypt.hashpw("secret", org.mindrot.jbcrypt.BCrypt.gensalt()));
+        mockUser.setMotDePasse("secret");
         mockUser.setActif(true);
 
         when(userDAO.findByLogin("jdoe")).thenReturn(mockUser);
@@ -39,7 +39,7 @@ public class AuthServiceTest {
     public void authenticate_withInvalidPassword_returnsNull() {
         Utilisateur mockUser = new Utilisateur();
         mockUser.setLogin("jdoe");
-        mockUser.setMotDePasse(org.mindrot.jbcrypt.BCrypt.hashpw("secret", org.mindrot.jbcrypt.BCrypt.gensalt()));
+        mockUser.setMotDePasse("secret");
         mockUser.setActif(true);
 
         when(userDAO.findByLogin("jdoe")).thenReturn(mockUser);
