@@ -1102,3 +1102,5 @@ FROM v_solde_participant
 WHERE
     id_cycle = 1
 ORDER BY numero_ordre;
+
+ALTER TABLE utilisateur ADD COLUMN photo LONGTEXT NULL;

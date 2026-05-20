@@ -26,7 +26,7 @@ public class DBConnection {
         try {
             HikariConfig config = new HikariConfig();
             config.setDriverClassName(getProperty("db.driverClassName", "com.mysql.cj.jdbc.Driver"));
-            config.setJdbcUrl(getProperty("db.url", "jdbc:mysql://localhost:3306/gestion_cotisation?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true"));
+            config.setJdbcUrl(getProperty("db.url", "jdbc:mysql://localhost:3306/cotizia_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true"));
             config.setUsername(getProperty("db.user", "root"));
             config.setPassword(getProperty("db.password", ""));
 
